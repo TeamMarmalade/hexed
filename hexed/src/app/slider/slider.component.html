@@ -1,1 +1,4 @@
 <p>slider works!</p>
+<label for="item-input">Add an item:</label>
+<input type="range" id="item-input" #newItem>
+<button type="button" (click)="changeValue(newItem.value)">Add to parent's list</button>

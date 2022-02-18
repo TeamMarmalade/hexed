@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hexed';
+  color: [number, number, number] = [0,0,0];
+  score: number = 0;
+  timer: number = 0;
+
+  changeValue(c: number, value: number) {
+    this.color[c] = value;
+  }
 }
