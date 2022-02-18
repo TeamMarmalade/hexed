@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styles: [
     `
     #color {
-      background-color: rgb(var(--color[0]), var(--color[1]), var(--color[2]));
+      background-color: rgb(var(--r), var(--g), var(--b));
     }
     `
   ]
