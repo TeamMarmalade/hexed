@@ -8,6 +8,7 @@ import { ColorComponent } from './color/color.component';
 import { TimerComponent } from './timer/timer.component';
 import { NameComponent } from './name/name.component';
 import { ScoreComponent } from './score/score.component';
+import { DisplayComponent } from './display/display.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ScoreComponent } from './score/score.component';
     ColorComponent,
     TimerComponent,
     NameComponent,
-    ScoreComponent
+    ScoreComponent,
+    DisplayComponent
   ],
   imports: [
     BrowserModule,
