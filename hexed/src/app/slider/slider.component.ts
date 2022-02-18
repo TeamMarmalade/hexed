@@ -8,8 +8,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class SliderComponent implements OnInit {
   //send slider component to parent
   @Output() ValueEmitter = new EventEmitter<number>();
-  changeValue(value: string) {
-    this.ValueEmitter.emit(+value); // parse to number
+  changeValue(e: any) {
+    this.ValueEmitter.emit(+e.target.value); // parse to number
   }
 
   constructor() { }
