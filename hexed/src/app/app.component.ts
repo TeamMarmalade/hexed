@@ -15,7 +15,7 @@ export class AppComponent {
   game_start: boolean = false;
   win: boolean = false;
   compare: boolean = false;
-  time: number = 20;
+  time: number = 60;
   original_time: number = this.time;
 
   changeValue(c: number, value: number) {
