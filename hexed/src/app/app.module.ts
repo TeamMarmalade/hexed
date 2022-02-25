@@ -9,6 +9,7 @@ import { TimerComponent } from './timer/timer.component';
 import { NameComponent } from './name/name.component';
 import { ScoreComponent } from './score/score.component';
 import { DisplayComponent } from './display/display.component';
+import { SubmitComponent } from './submit/submit.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DisplayComponent } from './display/display.component';
     TimerComponent,
     NameComponent,
     ScoreComponent,
-    DisplayComponent
+    DisplayComponent,
+    SubmitComponent
   ],
   imports: [
     BrowserModule,
