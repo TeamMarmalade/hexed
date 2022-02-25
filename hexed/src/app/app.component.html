@@ -1,4 +1,4 @@
-<app-name *ngIf="!formShow; else elseBlock" (NameEmitter)="saveInit($event)"></app-name>
+<app-name [scores]="scores" *ngIf="!formShow; else elseBlock" (NameEmitter)="saveInit($event)"></app-name>
 
 <ng-template #elseBlock>
   <app-timer [timeRemaining]="time" *ngIf="game_start" (EndEmitter)="endGame($event)" (TimeEmitter)="changeTime($event)" (EndEmitter)="failure($event)" [timeRemaining]="time"></app-timer>
