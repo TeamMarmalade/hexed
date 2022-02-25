@@ -1,1 +1,3 @@
-<p>name works!</p>
+<input required type="text" name="user-name" id="user-name" placeholder="Your Name" #name>
+<input type="number" name="user-time" id="user-time" #time>
+<button type="button" (click)="saveInit([name.value, time.valueAsNumber])">Start Hexed Game</button>

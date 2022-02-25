@@ -1,20 +1,24 @@
-<app-timer [timeRemaining]="time" *ngIf="game_start" (EndEmitter)="endGame($event)" (TimeEmitter)="changeTime($event)" (EndEmitter)="failure($event)" [timeRemaining]="time"></app-timer>
-<app-color (ColorEmitter)="getRandomColor($event)"></app-color>
-<app-slider (ValueEmitter)="changeValue(0, $event)" [gameStatus]="game_start" [curr_value]="color[0]"></app-slider>
-<app-slider (ValueEmitter)="changeValue(1, $event)" [gameStatus]="game_start" [curr_value]="color[1]"></app-slider>
-<app-slider (ValueEmitter)="changeValue(2, $event)" [gameStatus]="game_start" [curr_value]="color[2]"></app-slider>
+<app-name *ngIf="!formShow; else elseBlock" (NameEmitter)="saveInit($event)"></app-name>
 
-<div class="row">
-    <div>
-        <p>Your guess</p>
-        <app-display [color]="color"></app-display>
-    </div>
-    <div>
-        <p>Random Color</p>
-        <app-display [color]="random_color"></app-display>
-    </div>
-</div>
+<ng-template #elseBlock>
+  <app-timer [timeRemaining]="time" *ngIf="game_start" (EndEmitter)="endGame($event)" (TimeEmitter)="changeTime($event)" (EndEmitter)="failure($event)" [timeRemaining]="time"></app-timer>
+  <app-color (ColorEmitter)="getRandomColor($event)"></app-color>
+  <app-slider (ValueEmitter)="changeValue(0, $event)" [gameStatus]="game_start" [curr_value]="color[0]"></app-slider>
+  <app-slider (ValueEmitter)="changeValue(1, $event)" [gameStatus]="game_start" [curr_value]="color[1]"></app-slider>
+  <app-slider (ValueEmitter)="changeValue(2, $event)" [gameStatus]="game_start" [curr_value]="color[2]"></app-slider>
 
-<div>
-    <app-submit (SubmitEmitter)="compare_vals()"></app-submit>
-</div>
+  <div class="row">
+      <div>
+          <p>Your guess</p>
+          <app-display [color]="color"></app-display>
+      </div>
+      <div>
+          <p>Random Color</p>
+          <app-display [color]="random_color"></app-display>
+      </div>
+  </div>
+
+  <div>
+      <app-submit (SubmitEmitter)="compare_vals()"></app-submit>
+  </div>
+</ng-template>
