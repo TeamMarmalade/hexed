@@ -1,9 +1,13 @@
-<app-slider (ValueEmitter)="changeValue(0, $event)"></app-slider>
-<app-slider (ValueEmitter)="changeValue(1, $event)"></app-slider>
-<app-slider (ValueEmitter)="changeValue(2, $event)"></app-slider>
-<!-- {{}} = interpolation -->
-<p>{{color[0]}}</p>
-<p>{{color[1]}}</p>
-<p>{{color[2]}}</p>
-<app-display [color]="color"></app-display>
-<app-timer [timeRemaining]="timer">
+<app-name *ngIf="!gameStart; else elseBlock" (NameEmitter)="saveInit($event)"></app-name>
+
+<ng-template #elseBlock>
+  <app-slider (ValueEmitter)="changeValue(0, $event)"></app-slider>
+  <app-slider (ValueEmitter)="changeValue(1, $event)"></app-slider>
+  <app-slider (ValueEmitter)="changeValue(2, $event)"></app-slider>
+  <!-- {{}} = interpolation -->
+  <p>{{color[0]}}</p>
+  <p>{{color[1]}}</p>
+  <p>{{color[2]}}</p>
+  <app-display [color]="color"></app-display>
+  <app-timer [timeRemaining]="time"></app-timer>
+</ng-template>
