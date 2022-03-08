@@ -1,3 +1,9 @@
 <input required type="text" name="user-name" id="user-name" placeholder="Your Name" #name>
 <input type="number" name="user-time" id="user-time" #time>
 <button type="button" (click)="saveInit([name.value, time.valueAsNumber])">Start Hexed Game</button>
+<div id="high-scores">
+  <h3>High Scores</h3>
+  <ul>
+    <li *ngFor="let score of scores">{{score.name}} {{score.score}}</li>
+  </ul>
+</div>

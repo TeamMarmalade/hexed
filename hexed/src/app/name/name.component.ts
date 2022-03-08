@@ -1,4 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+
+interface Score {
+  name: string;
+  score: number;
+}
 
 @Component({
   selector: 'app-name',
@@ -7,6 +12,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class NameComponent implements OnInit {
   // send name component to parent
+  @Input() scores: Score[] = [];
   @Output() NameEmitter = new EventEmitter<[string, number]>();
   saveInit(init: [string, number]) {
     if (init[0] != '') { // user must enter a name

@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { HttpService } from './http.service';
+
+interface Score {
+  name: string;
+  score: number;
+}
 
 @Component({
   selector: 'app-root',
@@ -18,6 +24,24 @@ export class AppComponent {
   compare: boolean = false;
   time: number = 60;
   original_time: number = this.time;
+  scores: Score[] = [];
+
+  constructor(private http: HttpService) {};
+
+  ngOnInit() {
+    this.http.sendGetRequest("getscores").subscribe((data: any) => {
+      for (let name in data["scores"]) {
+        // console.log(name);
+        // console.log(data["scores"][name])
+        let current_score: Score = {name: name, score: data["scores"][name]};
+        this.scores.push(current_score);
+      }
+      this.scores.sort((a: Score, b: Score) => {
+        return b.score - a.score;
+      });
+      console.log(this.scores);
+    });
+  }
 
   changeValue(c: number, value: number) { // slider component
     this.color[c] = value;
