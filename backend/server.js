@@ -23,6 +23,8 @@ app.get('/getscores', (req, res) => {
 });
 
 app.get('/sendscore', (req, res) => {
+  // request body (json):
+  // {"name": "Yakob", "score": 230204}
   // insert a new score into the high scores
   // https://freebee.fun/cgi-bin/scores?<name>=<score>
 
