@@ -27,6 +27,8 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+Dockerfile
+docker-compose.yml
 
 # Miscellaneous
 /.angular/cache

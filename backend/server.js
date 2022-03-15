@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 const path = require('path');
 
-app.use(express.static(path.join(__dirname, '../hexed/dist/hexed')));
+app.use(express.static(path.join(__dirname, './dist/frontend')));
 
 app.get('/getscores', (req, res) => {
   // return universal player high scores
@@ -22,7 +22,7 @@ app.get('/getscores', (req, res) => {
   });
 });
 
-app.get('/sendscore', (req, res) => {
+app.post('/sendscore', (req, res) => {
   // request body (json):
   // {"name": "Yakob", "score": 230204}
   // insert a new score into the high scores
@@ -66,6 +66,11 @@ app.get('/sendscore', (req, res) => {
     // bad request body
   }
   
+});
+
+// server main route handler
+app.get('/*', function(req, res) {
+  res.sendFile(__dirname + '/dist/frontend/index.html');
 });
 
 app.listen(port, () => {
