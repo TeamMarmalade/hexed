@@ -6,6 +6,20 @@ interface Score {
   score: number;
 }
 
+abstract class GuessAbstract {
+  current_color: [number, number, number] = [0, 0, 0]
+}
+
+class Guess extends GuessAbstract {
+  getColor(): [number, number, number] {
+    return this.current_color;
+  }
+
+  getTColor(t: number): number {
+    return this.current_color[t];
+  }
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,12 +27,12 @@ interface Score {
 })
 export class AppComponent {
   title = 'hexed';
-  color: [number, number, number] = [0,0,0];
+  color: Guess = new Guess();
   score: number = 0;
   formShow: boolean = false;
   name: string = '';
   // timer: number = 0;
-  random_color: [number, number, number] = [0, 0, 0];
+  random_color: [any, any, any] = [0, 0, 0];
   game_start: boolean = false;
   win: boolean = false;
   compare: boolean = false;
@@ -29,6 +43,7 @@ export class AppComponent {
   constructor(private http: HttpService) {};
 
   ngOnInit() {
+    this.color.current_color = [0, 0, 0];
     this.http.sendGetRequest("getscores").subscribe((data: any) => {
       for (let name in data["scores"]) {
         // console.log(name);
@@ -43,15 +58,17 @@ export class AppComponent {
     });
   }
 
-  changeValue(c: number, value: number) { // slider component
-    this.color[c] = value;
+  changeValue(c: number, value: number) {
+    this.color.current_color[c] = value;
   }
-  saveInit(Init: [string, number]) { // name component
+
+  saveInit(Init: [string, number]) {
     this.original_time = Init[1];
     this.name = Init[0];
     this.formShow = true;
   }
-  getRandomColor(value: [number, number, number]) {
+
+  getRandomColor<T>(value: [T, T, T]) {
     this.time = this.original_time;
     this.random_color = value;
     this.game_start = true;
@@ -65,19 +82,28 @@ export class AppComponent {
   }
 
   compare_vals(): void {
-    if(this.color[0] === this.random_color[0] && this.color[1] === this.random_color[1] && this.color[2] === this.random_color[2]) {
+    if(this.color.current_color[0] === this.random_color[0] && this.color.current_color[1] === this.random_color[1] && this.color.current_color[2] === this.random_color[2]) {
       this.win = true;
       this.game_start = false;
-      this.score = ((255 - Math.abs(this.random_color[0] - this.color[0])) + (255 - Math.abs(this.random_color[1] - this.color[1])) + (255 - Math.abs(this.random_color[2] - this.color[2]))) * Math.floor(this.time) * (1000 * (101 - this.original_time));
+      this.score = ((255 - Math.abs(this.random_color[0] - this.color.current_color[0])) + (255 - Math.abs(this.random_color[1] - this.color.current_color[1])) + (255 - Math.abs(this.random_color[2] - this.color.current_color[2]))) * Math.floor(this.time) * (1000 * (101 - this.original_time));
 
       // this.time will give current time
       // alert(`Correct: Completed in ${this.original_time - this.time} seconds`);
       alert(`You won! Your score: ${this.score}`);
+
+      if(this.scores[this.scores.length - 1].score < this.score) {
+        this.http.sendPostRequest('sendscore', {
+          name: this.name,
+          score: this.score
+        }).subscribe((data) => {
+          console.log(data);
+        });
+      }
     }
     else {
       this.win = false;
       this.game_start = false;
-      this.score = ((255 - Math.abs(this.random_color[0] - this.color[0])) + (255 - Math.abs(this.random_color[1] - this.color[1])) + (255 - Math.abs(this.random_color[2] - this.color[2]))) * Math.floor(this.time) * (1000 * (101 - this.original_time));
+      this.score = ((255 - Math.abs(this.random_color[0] - this.color.current_color[0])) + (255 - Math.abs(this.random_color[1] - this.color.current_color[1])) + (255 - Math.abs(this.random_color[2] - this.color.current_color[2]))) * Math.floor(this.time) * (1000 * (101 - this.original_time));
 
       // this.time will give current time
       // alert(`Correct: Completed in ${this.original_time - this.time} seconds`);
@@ -95,7 +121,7 @@ export class AppComponent {
     console.log(this.random_color);
     console.log(this.color);
 
-    this.score = ((255 - Math.abs(this.random_color[0] - this.color[0])) + (255 - Math.abs(this.random_color[1] - this.color[1])) + (255 - Math.abs(this.random_color[2] - this.color[2]))) * Math.floor(this.time) * (1000 * (101 - this.original_time));
+    this.score = ((255 - Math.abs(this.random_color[0] - this.color.current_color[0])) + (255 - Math.abs(this.random_color[1] - this.color.current_color[1])) + (255 - Math.abs(this.random_color[2] - this.color.current_color[2]))) * Math.floor(this.time) * (1000 * (101 - this.original_time));
     console.log(this.score);
     alert(`You lost. Your score: ${this.score}`);
     this.formShow = false;

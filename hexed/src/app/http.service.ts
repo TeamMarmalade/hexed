@@ -13,4 +13,8 @@ export class HttpService {
   public sendGetRequest(route: string) {
     return this.httpClient.get(this.apiserver + route);
   }
+
+  public sendPostRequest(route: string, body: Object) {
+    return this.httpClient.post(this.apiserver + route, body);
+  }
 }

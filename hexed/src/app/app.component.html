@@ -1,24 +1,41 @@
 <app-name [scores]="scores" *ngIf="!formShow; else elseBlock" (NameEmitter)="saveInit($event)"></app-name>
 
 <ng-template #elseBlock>
-  <app-timer [timeRemaining]="time" *ngIf="game_start" (EndEmitter)="endGame($event)" (TimeEmitter)="changeTime($event)" (EndEmitter)="failure($event)" [timeRemaining]="time"></app-timer>
-  <app-color (ColorEmitter)="getRandomColor($event)"></app-color>
-  <app-slider (ValueEmitter)="changeValue(0, $event)" [gameStatus]="game_start" [curr_value]="color[0]"></app-slider>
-  <app-slider (ValueEmitter)="changeValue(1, $event)" [gameStatus]="game_start" [curr_value]="color[1]"></app-slider>
-  <app-slider (ValueEmitter)="changeValue(2, $event)" [gameStatus]="game_start" [curr_value]="color[2]"></app-slider>
+    <h1 class="display-4 text-center mt-3">HEXED</h1>
+    <div class="d-flex justify-content-center mt-5">
+        <div class="bg-light w-75 rounded-lg shadow">
+            <app-timer [timeRemaining]="time" *ngIf="game_start" (EndEmitter)="endGame($event)" (TimeEmitter)="changeTime($event)" (EndEmitter)="failure($event)" [timeRemaining]="time"></app-timer>
 
-  <div class="row">
-      <div>
-          <p>Your guess</p>
-          <app-display [color]="color"></app-display>
-      </div>
-      <div>
-          <p>Random Color</p>
-          <app-display [color]="random_color"></app-display>
-      </div>
-  </div>
-
-  <div>
-      <app-submit (SubmitEmitter)="compare_vals()"></app-submit>
-  </div>
+            <div class="d-flex justify-content-center mt-3 mb-3">
+                <app-color (ColorEmitter)="getRandomColor($event)"></app-color>
+            </div>
+            <div class="d-flex justify-content-around">
+                <div class="">
+                    <p class="text-center">Red</p>
+                    <app-slider (ValueEmitter)="changeValue(0, $event)" [gameStatus]="game_start" [curr_value]="color.current_color[0]"></app-slider>
+                </div>
+                <div>
+                    <p class="text-center">Green</p>
+                    <app-slider (ValueEmitter)="changeValue(1, $event)" [gameStatus]="game_start" [curr_value]="color.current_color[1]"></app-slider>
+                </div>
+                <div>
+                    <p class="text-center">Blue</p>
+                    <app-slider (ValueEmitter)="changeValue(2, $event)" [gameStatus]="game_start" [curr_value]="color.current_color[2]"></app-slider>
+                </div>
+            </div>
+            <div class="d-flex justify-content-around mb-5">
+                <div>
+                    <p class="text-center">Your guess</p>
+                    <app-display [color]="color.getColor()"></app-display>
+                </div>
+                <div>
+                    <p class="text-center">Random Color</p>
+                    <app-display [color]="random_color"></app-display>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-5">
+                <app-submit (SubmitEmitter)="compare_vals()"></app-submit>
+            </div>
+        </div>
+    </div>
 </ng-template>

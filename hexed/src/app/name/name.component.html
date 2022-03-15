@@ -1,9 +1,24 @@
-<input required type="text" name="user-name" id="user-name" placeholder="Your Name" #name>
-<input type="number" name="user-time" id="user-time" #time>
-<button type="button" (click)="saveInit([name.value, time.valueAsNumber])">Start Hexed Game</button>
-<div id="high-scores">
-  <h3>High Scores</h3>
-  <ul>
-    <li *ngFor="let score of scores">{{score.name}} {{score.score}}</li>
-  </ul>
+<div class="d-flex justify-content-center mt-4">
+  <div class="w-50 rounded-lg">
+    <div class="card p-5 text-center">
+      <div class="mb-md-5 mt-md-4 pb-5">
+        <h2 class="fw-bold mb-2 text-uppercase">Hexed</h2>
+        <div class="form-outline form-white mb-4 mt-3">
+          <label class="form-label">Username</label>
+          <input required type="text" name="user-name" id="user-name" placeholder="Your Name" #name class="form-control form-control-lg">
+        </div>
+        <div class="form-outline form-white mb-4">
+          <label class="form-label">Time</label>
+          <input type="number" name="user-time" id="user-time" placeholder="50" #time class="form-control form-control-lg">
+      </div>
+        <button type="button" (click)="saveInit([name.value, time.valueAsNumber])" class="btn btn-outline-dark btn-lg px-5" type="submit">Login</button>
+      </div>
+      <div>
+        <h3>High Scores</h3>
+        <ul>
+          <li *ngFor="let score of scores" class="text-center">{{score.name}} {{score.score}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
